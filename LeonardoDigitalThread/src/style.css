@@ -1,0 +1,359 @@
+node
+{
+	stroke-mode: plain;
+	size: 50px;
+	text-size:12;
+	fill-color:cyan;
+}
+
+node.World
+{
+	size: 60px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/connectedCog.png');
+	text-alignment: under;
+}
+
+node.ConfigurationDetail
+{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/ConfigDetail.png');
+	text-alignment: under;
+}
+
+node.DriverRepo
+{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/Repository.png');
+	text-alignment: under;
+}
+
+node.ConfigurationDetailValue
+{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/cog.png');
+	text-alignment: under;
+}
+
+
+node.RhapsodyDriver{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/ibm-rational_clipped.png');
+	text-visibility-mode: hidden;
+}
+
+node.RhapsodyDriverModel{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/RpyModel.png');
+	text-visibility-mode: hidden;
+}
+
+node.MatlabDriverModel{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/MatlabModel.png');
+	text-visibility-mode: hidden;
+}
+
+node.EclipseModellingFrameworkModel{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/EclipseModel.png');
+	text-visibility-mode: hidden;
+}
+
+node.SimulinkDriverModel{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/SimulinkModel.png');
+	text-visibility-mode: hidden;
+}
+
+node.MatlabDriver{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/matlab.png');
+	text-visibility-mode: hidden;
+}
+
+node.EclipseModellingFramework{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/Eclipse.png');
+	text-alignment: under;
+	text-visibility-mode: hidden;
+}
+
+node.XmlDriver{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/Xml.png');
+	text-visibility-mode: hidden;
+}
+
+node.XmlDriverModel{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/XmlModel.png');
+	text-visibility-mode: hidden;
+}
+
+node.SimulinkDriver{
+	size: 50px;
+	stroke-mode: plain;
+	text-size:12;
+	fill-color:cyan;
+	fill-mode: image-scaled;
+	fill-image: url('app/Simulink_Logo.png');
+	text-visibility-mode: hidden;
+}
+
+node.ExcelTable{
+	size: 50px;
+	text-size:12;
+	fill-mode: image-scaled;
+	fill-image: url('app/Excel.png');
+	text-visibility-mode: hidden;
+}
+
+node.ExcelTableModel{
+	size: 50px;
+	text-size:12;
+	fill-mode: image-scaled;
+	fill-image: url('app/ExcelModel.png');
+	text-visibility-mode: hidden;
+}
+
+node.Scope
+{
+	fill-color:#70D838;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.DataNode
+{
+	fill-color:#F14A8A;
+	size: 50px, 50px;
+}
+
+node.ValueNode
+{
+	fill-color:#F39B69;
+	size: 50px, 50px;
+}
+
+node.TypeNode
+{
+	fill-color:#7ABFAA;
+	size: 50px, 50px;
+}
+
+node.Dependency
+{
+	fill-color:pink;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.EcoreModelArtefact
+{
+	fill-color:yellow;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.XmlModelArtefact
+{
+	fill-color:yellow;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.EcoreMetaModelArtefact
+{
+	fill-color:aquamarine;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.XsdMetaModelArtefact
+{
+	fill-color:aquamarine;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+
+node.Value
+{
+	fill-color:#95728C;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.Process
+{
+	fill-color:#F14A8A;
+	text-style: bold;
+	size: 50px, 50px;
+	fill-mode: image-scaled;
+	fill-image: url('app/process.png');
+	text-alignment: under;
+}
+
+node.Transform
+{
+	fill-color:#60D888;
+	size: 50px, 50px;
+	shape: box;
+}
+
+node.TransformationRule
+{
+	fill-color:#60D888;
+	size: 50px, 50px;
+	shape: box;
+}
+
+node.Reuse
+{
+	fill-color:#95728C;
+	size: 50px, 50px;
+	shape: box;
+}
+
+node.Merge
+{
+	fill-color:#7ABFAA;
+	size: 50px, 50px;
+	shape: box;
+}
+
+node.Consolidate
+{
+	fill-color:#7A32A5;
+	size: 50px, 50px;
+	shape: box;
+}
+
+node.MergeRule
+{
+	fill-color:#7ABFAA;
+	size: 50px, 50px;
+	shape: box;
+}
+
+node.Check
+{
+	fill-color:#ACBC71;
+	size: 50px, 50px;
+	shape: box;
+}
+
+node.Input
+{
+	fill-color:#EAE5D6;
+	size: 50px, 50px;
+}
+
+node.Output
+{ 
+	fill-color:#F39B69;
+	size: 50px, 50px; 
+}
+
+node.Repo
+{
+	fill-color:orange;
+	size: 50px, 50px;
+}
+
+node.Model
+{
+	fill-color:#70D838;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.MetaModel
+{
+	fill-color:#87C838;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.ModelRepository
+{
+	fill-color:#93728A;
+	text-style: bold;
+	size: 50px, 50px;
+}
+
+node.Operation
+{
+	fill-color:#A14C8A;
+	size: 50px, 50px;
+}
+
+node.NameExpression
+{
+	fill-color:#93A28A;
+	size: 50px, 50px;
+}
+
+node.TypeExpression
+{
+	fill-color:#B3A2CA;
+	size: 50px, 50px;
+}
+
+edge 
+{
+	arrow-shape:arrow;
+	arrow-size:5px,5px;
+}
