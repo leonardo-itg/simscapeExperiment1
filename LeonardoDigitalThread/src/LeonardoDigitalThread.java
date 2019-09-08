@@ -243,17 +243,22 @@ public class LeonardoDigitalThread {
 						org.eclipse.epsilon.emc.simulink.types.Struct list = ( org.eclipse.epsilon.emc.simulink.types.Struct) parameterList;
 						Set<Entry<String, Object>> set = (Set<Entry<String, Object>>)list.entrySet();
 						for(Entry<String, Object> listEle : set) {
+							try {
 							System.out.println("\t\t" + listEle.getKey() + " :: ");
 							for(Entry<String, Object> listValEle : ((com.mathworks.matlab.types.Struct)listEle.getValue()).entrySet()) {
+
 								System.out.println("\t\t\t" + listValEle.getKey() + " :: " + listValEle.getValue());
 								if(listValEle.getValue() instanceof String[]) {
 									for(String strVal : (String[])listValEle.getValue()) {
 										System.out.println("\t\t\t\t" + strVal);
 									}
 								}
+
 							}
 							System.out.println("\t\t Value: " + x.getProperty(listEle.getKey()));	
-
+							} catch (EolIllegalPropertyException e1) {
+								e1.printStackTrace();
+							}
 						}
 
 						//Object parentObj = model.getElementById((String) parent);
@@ -265,12 +270,14 @@ public class LeonardoDigitalThread {
 					if(n1 == null) {
 						n1 = graphNew.addNode(x.getPath());
 						n1.addAttribute("ui.label", x.getPath());
+						n1.addAttribute("ui.class", "DataNode");
 						mapNodes.put(x.getPath(), n1);
 					}
 					Node typeNode = mapNodes.get(x.getType());
 					if(typeNode == null) {
 						typeNode = graphNew.addNode(x.getType());
 						typeNode.addAttribute("ui.label", x.getType());
+						typeNode.addAttribute("ui.class", "TypeNode");
 						mapNodes.put(x.getType(), typeNode);
 					}
 

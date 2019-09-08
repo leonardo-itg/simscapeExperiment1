@@ -177,20 +177,20 @@ node.Scope
 
 node.DataNode
 {
-	fill-color:#F14A8A;
-	size: 50px, 50px;
+	fill-color:#D1D14A;
+	size: 30px, 30px;
 }
 
 node.ValueNode
 {
 	fill-color:#F39B69;
-	size: 50px, 50px;
+	size: 20px, 20px;
 }
 
 node.TypeNode
 {
 	fill-color:#7ABFAA;
-	size: 50px, 50px;
+	size: 20px, 20px;
 }
 
 node.Dependency
