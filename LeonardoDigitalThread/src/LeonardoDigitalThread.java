@@ -93,8 +93,8 @@ public class LeonardoDigitalThread {
 		String engineJarPath = "C:\\Program Files\\MATLAB\\R2019a\\extern\\engines\\java\\jar\\engine.jar";
 		String workingDir = "D:\\\\simscapeExperiment1";
 		//String modelfile = "D:\\simscapeExperiment1\\simple.slx";
-		String modelfile = "D:\\simscapeExperiment1\\tank_circuit.slx";
-		//String modelfile = "D:\\\\simscapeExperiment1\\ee_radio_am_receiver.slx";
+		//String modelfile = "D:\\simscapeExperiment1\\tank_circuit.slx";
+		String modelfile = "D:\\\\simscapeExperiment1\\ee_radio_am_receiver.slx";
 		boolean followLinks = true;
 		boolean openMatlabEditor = false;
 
@@ -114,8 +114,10 @@ public class LeonardoDigitalThread {
 		graphNew.addAttribute("ui.antialias");
 		graphNew.addAttribute("ui.stylesheet", CSS);
 		
+		boolean printAllAttrValues = false;
+		
 		//simulinkToGraph1(model, graphNew);
-		simulinkToGraph2(model, graphNew);
+		simulinkToGraph2(model, graphNew, printAllAttrValues);
 
 		System.out.println("Finished Simulink Work!");
 
@@ -227,67 +229,95 @@ public class LeonardoDigitalThread {
 		graphNew.addEdge("e3b1", nH3, nH3b);
 		graphNew.addEdge("e3b2", nH3b, n1);*/
 	}
-	private static void simulinkToGraph2(final SimulinkModel model, final MultiGraph graphNew) {
+	private static void simulinkToGraph2(final SimulinkModel model, final MultiGraph graphNew, boolean printAllAttrValues) {
 		Map<String, Node> mapNodes = new HashMap<String, Node>();
 		Map<String, Edge> mapEdges = new HashMap<String, Edge>();
 		for(ISimulinkModelElement x : model.allContents()) {
 			try {
 				try {
+					String id = "id not set";
+					String nType = "nType not set";
 					try {
-						Object parent = x.getProperty("Parent");
-
-						Object parameterList = x.getProperty("ObjectParameters");
-
-						System.out.println("Skip " + parameterList.getClass());
-
-						org.eclipse.epsilon.emc.simulink.types.Struct list = ( org.eclipse.epsilon.emc.simulink.types.Struct) parameterList;
-						Set<Entry<String, Object>> set = (Set<Entry<String, Object>>)list.entrySet();
-						for(Entry<String, Object> listEle : set) {
-							try {
-							System.out.println("\t\t" + listEle.getKey() + " :: ");
-							for(Entry<String, Object> listValEle : ((com.mathworks.matlab.types.Struct)listEle.getValue()).entrySet()) {
-
-								System.out.println("\t\t\t" + listValEle.getKey() + " :: " + listValEle.getValue());
-								if(listValEle.getValue() instanceof String[]) {
-									for(String strVal : (String[])listValEle.getValue()) {
-										System.out.println("\t\t\t\t" + strVal);
-									}
-								}
-
-							}
-							System.out.println("\t\t Value: " + x.getProperty(listEle.getKey()));	
-							} catch (EolIllegalPropertyException e1) {
-								e1.printStackTrace();
-							}
+						nType = x.getType();
+						System.out.println("Node Type " + nType);
+						if (nType.equals("connection") ) {
+							id = "connection::" + x.getProperty("Handle");
 						}
+						else
+						{
+							id = x.getPath() + "::" + x.getProperty("Handle");
+						}
+						System.out.println("Id " + id);
+						System.out.println("x.getProperty(\"Parent\") " + x.getProperty("Parent"));
+						System.out.println("x.getProperty(\"Handle\") " + x.getProperty("Handle"));
 
-						//Object parentObj = model.getElementById((String) parent);
-						//System.out.println(parent + " " + parentObj);
+
+						if ( printAllAttrValues ) {
+							Object parameterList = x.getProperty("ObjectParameters");
+							//cast parameterList to org.eclipse.epsilon.emc.simulink.types.Struct
+							org.eclipse.epsilon.emc.simulink.types.Struct list = null;
+							try {
+								list = ( org.eclipse.epsilon.emc.simulink.types.Struct) parameterList;
+							} catch (Exception e2) {
+								// TODO Auto-generated catch block
+								e2.printStackTrace();
+							}
+							Set<Entry<String, Object>> set = (Set<Entry<String, Object>>)list.entrySet();
+							for(Entry<String, Object> listEle : set) {
+								System.out.println("\t\t" + listEle.getKey() + " :: ");
+								for(Entry<String, Object> listValEle : ((com.mathworks.matlab.types.Struct)listEle.getValue()).entrySet()) {
+	
+									System.out.println("\t\t\t" + listValEle.getKey() + " :: " + listValEle.getValue());
+									if(listValEle.getValue() instanceof String[]) {
+										for(String strVal : (String[])listValEle.getValue()) {
+											System.out.println("\t\t\t\t" + strVal);
+										}
+									}
+	
+								}
+								
+								System.out.print("\t\t\t" + listEle.getKey() + " :property value: " );	
+								try {
+									System.out.println( x.getProperty(listEle.getKey()));
+								} catch (EolIllegalPropertyException e1) {
+									System.out.println();
+									System.err.println( " error, illegal property" );
+								}
+							}
+	
+							//Object parentObj = model.getElementById((String) parent);
+							//System.out.println(parent + " " + parentObj);
+						}
 					} catch (EolIllegalPropertyException e1) {
 						e1.printStackTrace();
 					}
-					Node n1 = mapNodes.get(x.getPath());
+					Node n1 = mapNodes.get(id);
 					if(n1 == null) {
-						n1 = graphNew.addNode(x.getPath());
-						n1.addAttribute("ui.label", x.getPath());
+						n1 = graphNew.addNode(id);
+						n1.addAttribute("ui.label", id);
 						n1.addAttribute("ui.class", "DataNode");
-						mapNodes.put(x.getPath(), n1);
+						n1.addAttribute("layout.weight", 20.0);
+						mapNodes.put(id, n1);
 					}
-					Node typeNode = mapNodes.get(x.getType());
+					else {
+						System.err.println("Duplicate node :: " + id);
+					}
+					Node typeNode = mapNodes.get(nType);
 					if(typeNode == null) {
-						typeNode = graphNew.addNode(x.getType());
-						typeNode.addAttribute("ui.label", x.getType());
+						typeNode = graphNew.addNode(nType);
+						typeNode.addAttribute("ui.label", nType);
 						typeNode.addAttribute("ui.class", "TypeNode");
-						mapNodes.put(x.getType(), typeNode);
+						typeNode.addAttribute("layout.weight", 20.0);
+						mapNodes.put(nType, typeNode);
 					}
 
-					Edge e = mapEdges.get(x.getPath()+"_"+x.getType());
+					Edge e = mapEdges.get(id+"_"+nType);
 					if(e == null) {
-						e = graphNew.addEdge(x.getPath()+"_"+x.getType(), n1, typeNode);
-						mapEdges.put(x.getPath()+"_"+x.getType(), e);
+						e = graphNew.addEdge(id+"_"+nType, n1, typeNode);
+						e.addAttribute("layout.weight", 20.0);
+						mapEdges.put(id+"_"+nType, e);
 					}
-					System.out.println(x.hashCode());
-					System.out.println(x.getPath());
+
 				}catch(java.lang.NullPointerException nPE) {
 					System.err.println("Got null but continue " + x.getType());
 				}
